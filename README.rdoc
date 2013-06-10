@@ -1,8 +1,5 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
 Things you may want to cover:
 
 * Ruby version
@@ -23,6 +20,20 @@ Things you may want to cover:
 
 * ...
 
+When running 'cap deploy:setup' it was asking for a password but which is vagrant by default, you can fix it this way:
+
+set :ssh_options, {:forward_agent => true, keys: ['~/.vagrant.d/insecure_private_key']}
+
+Stumbled upon this:
+
+The following dependencies failed. Please check them and try again:
+--> You do not have permissions to write to `/home/vagrant/petproject'. (192.168.33.10)
+--> You do not have permissions to write to `/home/vagrant/petproject/releases'. (192.168.33.10)
+
+Fixed it running:
+
+vagrant@lucid32:~$ sudo chown -R vagrant petproject/
+vagrant@lucid32:~$ sudo chown -R vagrant petproject/releases/
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
